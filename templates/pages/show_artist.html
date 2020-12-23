@@ -1,0 +1,83 @@
+{% extends 'layouts/main.html' %}
+{% block title %}{{ artist.name }} | Artist{% endblock %}
+{% block content %}
+<ul class="controls">
+	<li class="edit"><a href="/artists/{{artist['artist'].id}}/edit">Edit</a></li>
+
+</ul>
+<div class="row">
+	<div class="col-sm-6">
+		<h1 class="monospace">
+			{{ artist['artist'].name }}
+		</h1>
+		<p class="subtitle">
+			ID: {{ artist['artist'].id }}
+		</p>
+		<div class="genres">
+			{% for genre in artist['artist'].genres %}
+			<span class="genre">{{ genre }}</span>
+			{% endfor %}
+		</div>
+		<p>
+			<i class="fas fa-globe-americas"></i> {{ artist['artist'].city }}, {{ artist['artist'].state }}
+		</p>
+		<p>
+			<i class="fas fa-phone-alt"></i> {% if artist['artist'].phone %}{{ artist['artist'].phone }}{% else %}No Phone{% endif %}
+        </p>
+        <p>
+			<i class="fas fa-link"></i> {% if artist['artist'].website %}<a href="{{ artist['artist'].website }}" target="_blank">{{ artist['artist'].website }}</a>{% else %}No Website{% endif %}
+		</p>
+		<p>
+			<i class="fab fa-facebook-f"></i> {% if artist['artist'].facebook_link %}<a href="{{ artist['artist'].facebook_link }}" target="_blank">{{ artist['artist'].facebook_link }}</a>{% else %}No Facebook Link{% endif %}
+        </p>
+		{% if artist['artist'].seeking_venue %}
+
+		{% if artist['artist'].seeking_venue == 'True' %}
+		<div class="seeking">
+			<p class="lead">Currently seeking performance venues</p>
+			<div class="description">
+				<i class="fas fa-quote-left"></i> {{ artist['artist'].seeking_description }} <i class="fas fa-quote-right"></i>
+			</div>
+		</div>
+		{% endif %}
+
+		{% else %}
+		<p class="not-seeking">
+			<i class="fas fa-moon"></i> Not currently seeking performance venues
+		</p>
+		{% endif %}
+	</div>
+	<div class="col-sm-6">
+		<img src="{{ artist['artist'].image_link }}" alt="Venue Image" />
+	</div>
+</div>
+<section>
+	<h2 class="monospace">{{ artist.upcomming_count }} Upcoming {% if artist.upcomming_count == 1 %}Show{% else %}Shows{% endif %}</h2>
+	<div class="row">
+		{%for upcomming_data in  artist['upcomming_venue'] %}
+		<div class="col-sm-4">
+			<div class="tile tile-show">
+				<img src="{{ upcomming_data.image_link }}" alt="Show Venue Image" />
+				<h5><a href="/venues/{{ upcomming_data.id }}">{{ upcomming_data.name }}</a></h5>
+				<h6>{{ artist['upcomming_date'][loop.index -1 ][1] }}</h6>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+<section>
+	<h2 class="monospace">{{ artist['past_count'] }} Past {% if artist['past_count'] == 1 %}Show{% else %}Shows{% endif %}</h2>
+	<div class="row">
+		{%for past_data in artist['past_venue'] %}
+		<div class="col-sm-4">
+			<div class="tile tile-show">
+				<img src="{{ past_data.image_link }}" alt="Show Venue Image" />
+				<h5><a href="/venues/{{ past_data.id }}">{{ past_data.name }}</a></h5>
+				<h6>{{ artist['past_date'][loop.index -1 ][1] }}</h6>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'layouts/main.html' %}
+{% block title %}New Artist{% endblock %}
+{% block content %}
+  <div class="form-wrapper">
+    <form method="post" class="form">
+      <h3 class="form-heading">List a new venue</h3>
+      <div class="form-group">
+        <label for="name">Name</label>
+        {{ form.name(class_ = 'form-control',value = venue.name, autofocus = true) }}
+      </div>
+      <div class="form-group">
+          <label>City & State</label>
+          <div class="form-inline">
+            <div class="form-group">
+              {{ form.city(class_ = 'form-control',value=venue.city, placeholder='City', autofocus = true) }}
+            </div>
+            <div class="form-group">
+              {{ form.state(class_ = 'form-control',value=venue.state, placeholder='State', autofocus = true) }}
+            </div>
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        {{ form.address(class_ = 'form-control',value=venue.address,  placeholder='Address', autofocus = true) }}
+      </div>
+      <div class="form-group">
+          <label for="phone">Phone</label>
+          {{ form.phone(class_ = 'form-control',value=venue.phone,  placeholder='xxx-xxx-xxxx', autofocus = true) }}
+        </div>
+        
+        <div class="form-group">
+          <label for="image_link">Image Link</label>
+          {{ form.image_link(class_ = 'form-control',value=venue.image_link, placeholder='http://', autofocus = true) }}
+        </div>
+        <div class="form-group">
+          <label for="genres">Facebook Link</label>
+          {{ form.facebook_link(class_ = 'form-control',value=venue.facebook_link, placeholder='http://', autofocus = true) }}
+        </div>
+      <div class="form-group">
+        <label for="genres">Genres</label>
+        <small>Ctrl+Click to select multiple</small>
+        {{ form.genres(class_ = 'form-control',value = venue.genres,  placeholder='Genres, separated by commas',  autofocus = true) }}
+      </div>
+      <div class="form-group">
+        <label for="seeking_venue">seeking_venue</label>
+        {{ form.seeking_venue(class_ = 'form-control',value = venue.seeking_venue, placeholder='seeking_venue, separated by commas',  autofocus = true) }}
+        </div>
+        <div class="form-group">
+          <label for="description">description</label>
+          {{ form.description(class_ = 'form-control',value = venue.seeking_description, autofocus = true) }}
+        </div>
+  
+        <div class="form-group">
+          <label for="website">Website Link</label>
+          {{ form.website(class_ = 'form-control',value = venue.website, placeholder='http://', autofocus = true) }}
+        </div>
+
+        
+
+
+      <input type="submit" value="Create Venue" class="btn btn-primary btn-lg btn-block">
+    </form>
+  </div>
+{% endblock %}
