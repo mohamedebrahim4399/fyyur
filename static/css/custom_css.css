@@ -1,0 +1,21 @@
+.controls {
+    list-style-type: none
+}
+.controls li {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 10px 20px;
+    border: 1px solid #ff8c3a;
+    border-radius: 10px;
+    font-size: 19px;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+    color: #ff8c3a;
+}
+.controls li:hover {
+    background:#ff8c3a;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+}
+.controls li:hover {color: #fff;}
+.controls li a {text-decoration: none;}
+.controls li:hover a {color: #fff;}

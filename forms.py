@@ -85,11 +85,19 @@ class VenueForm(Form):
     phone = StringField(
         'phone'
     )
+    seeking_venue = SelectField(
+        # TODO implement enum restriction
+        'seeking_venue', validators=[DataRequired()],
+        choices=[
+            ('True', 'True'),
+            ('False', 'False')
+        ]
+    )
+    description = StringField(
+        'description', validators=[DataRequired()]
+    )
     image_link = StringField(
         'image_link'
-    ) 
-    facebook_link = StringField(
-        'facebook_link', validators=[URL()]
     )
     genres = SelectMultipleField(
         # TODO implement enum restriction
@@ -116,19 +124,11 @@ class VenueForm(Form):
             ('Other', 'Other'),
         ]
     )
-    seeking_venue = SelectField(
-        # TODO implement enum restriction
-        'seeking_venue', validators=[DataRequired()],
-        choices=[
-            ('True', 'True'),
-            ('False', 'False')
-        ]
-    )
-    description = StringField(
-        'description', validators=[DataRequired()]
-    )
     website = StringField(
         'website', validators=[URL()]
+    )
+    facebook_link = StringField(
+        'facebook_link', validators=[URL()]
     )
 
 class ArtistForm(Form):
@@ -198,7 +198,20 @@ class ArtistForm(Form):
         # TODO implement validation logic for state
         'phone'
     )
-    
+    seeking_venue = SelectField(
+        # TODO implement enum restriction
+        'seeking_venue', validators=[DataRequired()],
+        choices=[
+            ('True', 'True'),
+            ('False', 'False')
+        ]
+    )
+    description = StringField(
+        'description', validators=[DataRequired()]
+    )
+    image_link = StringField(
+        'image_link'
+    )
     genres = SelectMultipleField(
         # TODO implement enum restriction
         'genres', validators=[DataRequired()],
@@ -224,26 +237,12 @@ class ArtistForm(Form):
             ('Other', 'Other'),
         ]
     )
-    image_link = StringField(
-        'image_link'
+    website = StringField(
+        'website', validators=[URL()]
     )
     facebook_link = StringField(
         # TODO implement enum restriction
         'facebook_link', validators=[URL()]
-    )
-    seeking_venue = SelectField(
-        # TODO implement enum restriction
-        'seeking_venue', validators=[DataRequired()],
-        choices=[
-            ('True', 'True'),
-            ('False', 'False')
-        ]
-    )
-    description = StringField(
-        'description', validators=[DataRequired()]
-    )
-    website = StringField(
-        'website', validators=[URL()]
     )
 
 # TODO IMPLEMENT NEW ARTIST FORM AND NEW SHOW FORM

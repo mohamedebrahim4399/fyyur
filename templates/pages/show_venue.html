@@ -1,105 +1,82 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Venue Search{% endblock %}
 {% block content %}
-
 <ul class="controls">
-	<li class="edit"><a href="/venues/{{venue['venue'].id}}/edit">Edit</a></li>
-	<button class="delete_venue" data-id="{{venue['venue'].id}}">Delete</button>
-
+	<li class="edit"><a href="/venues/{{venue.id}}/edit">Edit</a></li>
+	<li class="delete venue" data-id="{{venue.id}}">Delete</li>
 </ul>
 <div class="row">
 	<div class="col-sm-6">
 		<h1 class="monospace">
-			{{ venue['venue'].name }}
+			{{ venue.name }}
 		</h1>
 		<p class="subtitle">
-			ID: {{ venue['venue'].id }}
+			ID: {{ venue.id }}
 		</p>
 		<div class="genres">
-			{% for genre in venue['venue'].genres %}
-			<span class="genre">{{ genre }}</span>
-			{% endfor %}
+			<span class="genre">{{ venue.genres }}</span>
 		</div>
 		<p>
-			<i class="fas fa-globe-americas"></i> {{ venue['venue'].city }}, {{ venue['venue'].state }}
+			<i class="fas fa-globe-americas"></i> {{ venue.city }}, {{ venue.state }}
 		</p>
 		<p>
-			<i class="fas fa-map-marker"></i> {% if venue['venue'].address %}{{ venue['venue'].address }}{% else %}No Address{% endif %}
+			<i class="fas fa-map-marker"></i> {% if venue.address %}{{ venue.address }}{% else %}No Address{% endif %}
 		</p>
 		<p>
-			<i class="fas fa-phone-alt"></i> {% if venue['venue'].phone %}{{ venue['venue'].phone }}{% else %}No Phone{% endif %}
+			<i class="fas fa-phone-alt"></i> {% if venue.phone %}{{ venue.phone }}{% else %}No Phone{% endif %}
 		</p>
 		<p>
-			<i class="fas fa-link"></i> {% if venue['venue'].website %}<a href="{{ venue.website }}" target="_blank">{{ venue['venue'].website }}</a>{% else %}No Website{% endif %}
+			<i class="fas fa-link"></i> {% if venue.website %}<a href="{{ venue.website }}" target="_blank">{{ venue.website }}</a>{% else %}No Website{% endif %}
 		</p>
 		<p>
-			<i class="fab fa-facebook-f"></i> {% if venue['venue'].facebook_link %}<a href="{{ venue.facebook_link }}" target="_blank">{{ venue['venue'].facebook_link }}</a>{% else %}No Facebook Link{% endif %}
+			<i class="fab fa-facebook-f"></i> {% if venue.facebook_link %}<a href="{{ venue.facebook_link }}" target="_blank">{{ venue.facebook_link }}</a>{% else %}No Facebook Link{% endif %}
 		</p>
-		{% if venue['venue'].seeking_talent %}
+		{% if venue.seeking_venue == "True" %} 
 		<div class="seeking">
 			<p class="lead">Currently seeking talent</p>
 			<div class="description">
-				<i class="fas fa-quote-left"></i> {{ venue['venue'].seeking_description }} <i class="fas fa-quote-right"></i>
+				<i class="fas fa-quote-left"></i> {{ venue.seeking_description }} <i class="fas fa-quote-right"></i>
 			</div>
 		</div>
-		{% else %}
-
-		{% if venue['venue'].seeking_venue == "False" %}
+		{% else %}	
 		<p class="not-seeking">
 			<i class="fas fa-moon"></i> Not currently seeking talent
 		</p>
 		{% endif %}
-
-		{% endif %}
 	</div>
 	<div class="col-sm-6">
-		<img src="{{ venue['venue'].image_link }}" alt="Venue Image" />
+		<img src="{{ venue.image_link }}" alt="Venue Image" />
 	</div>
 </div>
+
 <section>
-	<h2 class="monospace">{{ venue['upcomming_count'] }} Upcoming {% if venue['upcomming_count'] == 1 %}Show{% else %}Shows{% endif %}</h2>
+	<h2 class="monospace">{{ upcomming_count }} Upcoming Shows</h2>
 	<div class="row">
-		{%for upcomming_data in venue['upcomming_artist'] %}
+		{%for upcomming_data in upcomming_artist %}
 		<div class="col-sm-4">
 			<div class="tile tile-show">
 				<img src="{{ upcomming_data.image_link }}" alt="Show Artist Image" />
 				<h5><a href="/artists/{{ upcomming_data.id }}">{{ upcomming_data.name }}</a></h5>
-				<h6>{{ venue['upcomming_date'][loop.index -1 ][1] }}</h6>
+				<h6>{{ upcomming_date[loop.index -1 ][1] }}</h6>
 			</div>
 		</div>
 		{% endfor %}
 	</div>
 </section>
 <section>
-	<h2 class="monospace">{{ venue['past_count'] }} Past {% if venue['past_count'] == 1 %}Show{% else %}Shows{% endif %}</h2>
+	<h2 class="monospace">{{ past_count }} Past Shows</h2>
 	<div class="row">
-		{%for past_data in venue['past_artist'] %}
+		{%for past_data in past_artist %}
 		<div class="col-sm-4">
 			<div class="tile tile-show">
 				<img src="{{ past_data.image_link }}" alt="Show Artist Image" />
 				<h5><a href="/artists/{{ past_data.id }}">{{ past_data.name }}</a></h5>
-				<h6>{{ venue['past_date'][loop.index -1 ][1] }}</h6>
+				<h6>{{ past_date[loop.index -1 ][1] }}</h6>
 			</div>
 		</div>
 		{% endfor %}
 	</div>
 </section>
-<script>
-    const deleteBns = document.querySelectorAll('.controls .delete_venue ')
-      for(let i = 0; i < deleteBns.length; i++) {
-        	const btn = deleteBns[i];
-       		btn.onclick = function(e) {
-
-			console.log()
-			const btnId = e.target.dataset['id'];
-			console.log(btnId)
-            fetch('/venues/' + btnId, {
-	              method: 'delete'
-            })
-            .then(response => {
-				console.log(response)
-            	window.location.href = "/";
-            })}}
-  </script>
 
 {% endblock %}
+

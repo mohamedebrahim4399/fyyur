@@ -29,14 +29,6 @@
         {{ form.genres(class_ = 'form-control',value = artist.geners, placeholder='Genres, separated by commas',  autofocus = true) }}
       </div>
       <div class="form-group">
-        <label for="image_link">Image Link</label>
-        {{ form.image_link(class_ = 'form-control',value = artist.image_link, placeholder='http://', autofocus = true) }}
-      </div>
-      <div class="form-group">
-        <label for="genres">Facebook Link</label>
-        {{ form.facebook_link(class_ = 'form-control',value = artist.facebook_link, placeholder='http://', autofocus = true) }}
-      </div>
-      <div class="form-group">
         <label for="seeking_venue">seeking_venue</label>
         {{ form.seeking_venue(class_ = 'form-control', placeholder='seeking_venue, separated by commas',value=artist.seeking_venue,  autofocus = true) }}
         </div>
@@ -50,9 +42,15 @@
           {{ form.website(class_ = 'form-control',value = artist.website, placeholder='http://', autofocus = true) }}
         </div>
 
-        
+        <div class="form-group">
+          <label for="genres">Facebook Link</label>
+          {{ form.facebook_link(class_ = 'form-control',value = artist.facebook_link, placeholder='http://', autofocus = true) }}
+        </div>
 
-        
+        <div class="form-group">
+          <label for="image_link">Image Link</label>
+          {{ form.image_link(class_ = 'form-control',value = artist.image_link, placeholder='http://', autofocus = true) }}
+        </div>
 
       <input type="submit" value="Create Venue" class="btn btn-primary btn-lg btn-block">
     </form>
