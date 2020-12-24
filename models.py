@@ -1,4 +1,7 @@
 from app import db
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 showing = db.Table('showing',
   db.Column('venue_id', db.Integer, db.ForeignKey('Venue.id')),
