@@ -2,3 +2,13 @@ babel
 python-dateutil==2.6.0
 flask-moment
 flask-wtf
+Flask-SQLAlchemy==2.4.4
+SQLAlchemy==1.3.20
+DateTime==4.3
+Flask==1.1.2
+Flask-Migrate==2.5.3
+Jinja2==2.11.2
+
+
+
+
